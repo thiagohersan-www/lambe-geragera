@@ -189,7 +189,7 @@ function drawSubtitle(canvas, subtitle) {
   canvas.noStroke();
   canvas.rectMode(CENTER);
   canvas.textFont(mFont);
-  canvas.textAlign(CENTER, TOP);
+  canvas.textAlign(CENTER, CENTER);
 
   textSize(mTextSize);
   while (textWidth(subtitle) > RECT_SIZE.x-16) {
@@ -202,6 +202,6 @@ function drawSubtitle(canvas, subtitle) {
   canvas.translate(RECT_POS.x, RECT_POS.y);
   canvas.rect(0, 0, RECT_SIZE.x, RECT_SIZE.y);
   canvas.fill(255);
-  canvas.text(subtitle, 0, ACCENT_CORRECTION*mTextSize, RECT_SIZE.x, RECT_SIZE.y+16);
+  canvas.text(subtitle, 0, 0);
   canvas.pop();
 }
