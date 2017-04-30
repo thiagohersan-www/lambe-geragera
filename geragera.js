@@ -26,6 +26,7 @@ var PAGE_PROPORTION = 1.3;
 var pageHeight = 680;
 
 var MAX_FONT_SIZE = 500;
+var ACCENT_CORRECTION = 0.18;
 
 var BORDER_WIDTH = 18;
 var borderPadding = BORDER_WIDTH;
@@ -56,6 +57,8 @@ function setup() {
   textCanvas = createGraphics(width, int(2*height));
   tempTextcanvas = createGraphics(textCanvas.width, textCanvas.height);
   backgroundCanvas = createGraphics(width, height);
+
+  textFont(mFont);
 
   drawFrame(backgroundCanvas);
   drawSubtitle(backgroundCanvas, "GREVE GERAL - 28/04");
@@ -131,22 +134,24 @@ function drawText(canvas, line) {
   tempTextcanvas.smooth();
   tempTextcanvas.background(255);
   tempTextcanvas.textFont(mFont);
-  tempTextcanvas.textAlign(CENTER, CENTER);
+  tempTextcanvas.textAlign(LEFT, TOP);
 
   var words = line.split("\n");
   var yPos = textPadding;
   for(var i=0; i<words.length; i++) {
     words[i] = words[i].toUpperCase();
+
     mTextSize = MAX_FONT_SIZE;
     textSize(mTextSize);
-    while(textWidth(words[i]) > width-2*textPadding) {
+    while(textWidth(words[i]) > width-2*textPadding-8) {
       mTextSize -= 2;
       textSize(mTextSize);
     }
 
     tempTextcanvas.fill(0);
     tempTextcanvas.textSize(mTextSize);
-    tempTextcanvas.text(words[i], textPadding, yPos, width-2*textPadding, 1.02*mTextSize);
+    tempTextcanvas.text(words[i], textPadding, yPos+ACCENT_CORRECTION*mTextSize);
+
     yPos += mTextSize;
   }
   yPos += textPadding;
@@ -184,10 +189,10 @@ function drawSubtitle(canvas, subtitle) {
   canvas.noStroke();
   canvas.rectMode(CENTER);
   canvas.textFont(mFont);
-  canvas.textAlign(CENTER, CENTER);
+  canvas.textAlign(CENTER, TOP);
 
   textSize(mTextSize);
-  while (textWidth(subtitle) > RECT_SIZE.x-8) {
+  while (textWidth(subtitle) > RECT_SIZE.x-16) {
     mTextSize -= 2;
     textSize(mTextSize);
   }
@@ -197,6 +202,6 @@ function drawSubtitle(canvas, subtitle) {
   canvas.translate(RECT_POS.x, RECT_POS.y);
   canvas.rect(0, 0, RECT_SIZE.x, RECT_SIZE.y);
   canvas.fill(255);
-  canvas.text(subtitle, 0, 0, RECT_SIZE.x, RECT_SIZE.y+8);
+  canvas.text(subtitle, 0, ACCENT_CORRECTION*mTextSize, RECT_SIZE.x, RECT_SIZE.y+16);
   canvas.pop();
 }
