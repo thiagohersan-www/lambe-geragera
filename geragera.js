@@ -77,7 +77,7 @@ function mousePressed() {
 function breakText(line, numLines) {
   line = line.trim();
   line = line.replace(/ +/g, ' ');
-  var spaceCount = line.match(/ /g || []).length;
+  var spaceCount = (line.match(/ /g) || []).length;
 
 
   if(spaceCount < numLines) {
@@ -135,11 +135,11 @@ function drawText(canvas, line) {
 
   var words = line.split("\n");
   var yPos = textPadding;
-  for (var i=0; i<words.length; i++) {
+  for(var i=0; i<words.length; i++) {
     words[i] = words[i].toUpperCase();
     mTextSize = MAX_FONT_SIZE;
     textSize(mTextSize);
-    while (textWidth(words[i]) > width-2*textPadding) {
+    while(textWidth(words[i]) > width-2*textPadding) {
       mTextSize -= 2;
       textSize(mTextSize);
     }
