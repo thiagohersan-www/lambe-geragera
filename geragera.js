@@ -53,7 +53,7 @@ function setup() {
   smooth();
 
   textArea = createVector(width-2*textPadding, height-2*textPadding);
-  textCanvas = createGraphics(width, int(1.3*height));
+  textCanvas = createGraphics(width, int(2*height));
   tempTextcanvas = createGraphics(textCanvas.width, textCanvas.height);
   backgroundCanvas = createGraphics(width, height);
 
@@ -82,6 +82,8 @@ function breakText(line, numLines) {
 
   if(spaceCount < numLines) {
     line = line.replace(/ /g, '\n');
+  } else if(spaceCount < numLines+1) {
+    line = breakStringIntoLines(line, numLines-1);
   } else {
     line = breakStringIntoLines(line, numLines);
   }
