@@ -1,26 +1,7 @@
 'use strict';
 
-var cnt = 0;
-var mPoem = [
-  "GREVE (Gioconda Belli)",
-  "Quero uma greve onde vamos todos.",
-  "Uma greve de braços, pernas, cabelos.",
-  "Uma greve nascendo em cada corpo.",
-  "Quero uma greve",
-  "De operários, de pombas, De chofres, de flores",
-  "De técnicos, de crianças, De médicos, de mulheres",
-  "Quero uma greve grande,",
-  "Que até o amor alcance.",
-  "Uma greve onde tudo se detenha:",
-  "O relógio das fábricas O seminário, os colégios",
-  "O ônibus, os hospitais A estrada, os portos.",
-  "Uma greve de olhos, de mão e de beijo.",
-  "Uma greve onde respirar não seja permitido,",
-  "Uma greve onde nasça o silêncio",
-  "Para ouvir os passos do tirano que marcha."
-];
-
-var mPhrase = mPoem[cnt];
+var mPhrase = "";
+var mTitle = "";
 
 var PAGE_PROPORTION = 1.3;
 var pageHeight = 680;
@@ -43,11 +24,16 @@ function preload() {
 function setup() {
   var dW = document.body.offsetWidth;
   var dH = document.body.offsetHeight;
-  var canvasW = Math.min(dW, PAGE_PROPORTION * dH);
+
+  var formHeight = document.getElementById("inputsContainer").offsetHeight;
+
+  var canvasW = Math.min(dW, PAGE_PROPORTION * (dH-formHeight));
   var canvasH = canvasW / PAGE_PROPORTION;
 
   document.getElementById("myCanvas").style.width = canvasW + "px";
   document.getElementById("myCanvas").style.height = canvasH + "px";
+  document.getElementById("lambeTexto").style.width = (canvasW-20) + "px";
+  document.getElementById("lambeTitulo").style.width = (canvasW-20) + "px";
 
   var myCanvas = createCanvas(canvasW, canvasH);
   myCanvas.parent('myCanvas');
@@ -61,20 +47,27 @@ function setup() {
   textFont(mFont);
 
   drawFrame(backgroundCanvas);
-  drawSubtitle(backgroundCanvas, "GREVE GERAL - 28/04");
+  drawSubtitle(backgroundCanvas, mTitle);
   drawText(textCanvas, breakText(mPhrase, 4));
 }
 
 function draw() {
   background(255);
+  var cPhrase = document.getElementById("lambeTexto").value;
+  var cTitle = document.getElementById("lambeTitulo").value;
+
+  if(cPhrase != mPhrase) {
+    mPhrase = cPhrase;
+    drawText(textCanvas, breakText(mPhrase, 4));
+  }
+  if (cTitle != mTitle) {
+    mTitle = cTitle;
+    drawFrame(backgroundCanvas);
+    drawSubtitle(backgroundCanvas, mTitle);
+  }
+
   image(textCanvas, 0, 0);
   image(backgroundCanvas, 0, 0);
-}
-
-function mousePressed() {
-  cnt = (cnt+1)%mPoem.length;
-  mPhrase = mPoem[cnt];
-  drawText(textCanvas, breakText(mPhrase, 4));
 }
 
 function breakText(line, numLines) {
@@ -182,7 +175,11 @@ function drawFrame(canvas) {
 function drawSubtitle(canvas, subtitle) {
   var RECT_POS = createVector(width/2, textPadding+6.5*textArea.y/7.0);
   var RECT_SIZE = createVector(width-2*textPadding-8, textArea.y/7.0-8);
-  var mTextSize = MAX_FONT_SIZE;
+  var mTextSize = RECT_SIZE.y;
+
+  subtitle = subtitle.trim();
+  subtitle = subtitle.replace(/ +/g, ' ');
+  subtitle = subtitle.toUpperCase();
 
   canvas.smooth();
   canvas.fill(0);
@@ -197,11 +194,15 @@ function drawSubtitle(canvas, subtitle) {
     textSize(mTextSize);
   }
   canvas.textSize(mTextSize);
+  var heightScaleRatio = RECT_SIZE.y/mTextSize;
 
   canvas.push();
   canvas.translate(RECT_POS.x, RECT_POS.y);
   canvas.rect(0, 0, RECT_SIZE.x, RECT_SIZE.y);
   canvas.fill(255);
+  canvas.push();
+  canvas.scale(1,heightScaleRatio);
   canvas.text(subtitle, 0, 0);
+  canvas.pop();
   canvas.pop();
 }
