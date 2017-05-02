@@ -21,6 +21,12 @@ function preload() {
   mFont = loadFont("MyFont-Bold.otf");
 }
 
+function saveLambe() {
+  var fname = document.getElementById("lambeTexto").value;
+  fname = fname.trim().replace(/ +/g, '').substring(0,8);
+  saveCanvas(fname, "jpg");
+}
+
 function setup() {
   var dW = document.body.offsetWidth;
   var dH = document.body.offsetHeight;

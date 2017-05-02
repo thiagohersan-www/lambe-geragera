@@ -2,6 +2,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Greve Poema</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.js"></script>
     <script src="geragera.js"></script>
     <style>
@@ -16,6 +17,28 @@
       #inputsContainer {
         margin: 0;
       }
+      #shareButtons {
+        margin: 0 auto;
+        position: fixed;
+        top: 5px;
+        left: 0;
+        background-color: #fff;
+        z-index: 10;
+        width: 2rem;
+        padding: 0 5px;
+      }
+      a {
+        text-decoration: none;
+      }
+      i.fa {
+        font-size: 2rem;
+        color: #000;
+        padding: 5px 0;
+        transition: color 0.15s linear;
+      }
+      i.fa:hover {
+        color: #aaa;
+      }
     </style>
   </head>
 
@@ -24,6 +47,19 @@
     <div id="inputsContainer">
       <input type="text" maxlength="80" class="textInput" id="lambeTexto" value="texto do lambe">
       <input type="text" maxlength="24" class="textInput" id="lambeTitulo" value="título">
+    </div>
+    <div id="shareButtons">
+      <a title="Baixe a imagem" href="/#">
+        <i class="fa fa-download" aria-hidden="true" onclick="saveLambe()"></i>
+      </a>
+      <!--
+      <a title="Compartilhe no Facebook" target="_blank" href="">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a title="Compartilhe no Twitter" target="_blank" href="">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      -->
     </div>
   </body>
 </html>
