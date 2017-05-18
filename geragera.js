@@ -46,7 +46,7 @@ function setup() {
   smooth();
 
   textArea = createVector(width-2*textPadding, height-2*textPadding);
-  textCanvas = createGraphics(width, int(2*height));
+  textCanvas = createGraphics(width, int(3*height));
   tempTextcanvas = createGraphics(textCanvas.width, textCanvas.height);
   backgroundCanvas = createGraphics(width, height);
 
