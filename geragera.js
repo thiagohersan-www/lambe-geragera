@@ -154,7 +154,7 @@ function drawText(canvas, line) {
 
     tempTextcanvas.fill(0);
     tempTextcanvas.textSize(mTextSize);
-    tempTextcanvas.text(words[i],leftPos, yPos+ACCENT_CORRECTION*mTextSize);
+    tempTextcanvas.text(words[i], leftPos, yPos+ACCENT_CORRECTION*mTextSize);
 
     yPos += mTextSize;
   }
