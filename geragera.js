@@ -23,7 +23,8 @@ function preload() {
   mFont = loadFont("MyFont-Bold.otf");
 }
 
-function saveLambe() {
+function saveLambe(event) {
+  event.preventDefault();
   var fname = document.getElementById("lambeTexto").value;
   fname = fname.trim().replace(/ +/g, '').substring(0,8);
   saveCanvas(fname, "jpg");
