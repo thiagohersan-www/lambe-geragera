@@ -17,7 +17,7 @@
       #inputsContainer {
         margin: 0;
       }
-      #shareButtons {
+      #shareButtons, .button {
         margin: 0 auto;
         position: fixed;
         top: 5px;
@@ -47,24 +47,16 @@
     <div id="inputsContainer">
       <input type="text" maxlength="80" class="textInput" id="lambeTexto" value="texto do lambe">
       <input type="text" maxlength="24" class="textInput" id="lambeTitulo" value="título">
-      <a title="Baixe a imagem do Lambe" href="/#">
+      <a title="Baixe a imagem do Lambe" href="">
         <div class="button" onclick="saveLambe()">
           Baixe a imagem do Lambe
         </div>
       </a>
     </div>
     <div id="shareButtons">
-      <a title="Baixe a imagem" href="/#">
+      <a title="Baixe a imagem" href="">
         <i class="fa fa-download" aria-hidden="true" onclick="saveLambe()"></i>
       </a>
-      <!--
-      <a title="Compartilhe no Facebook" target="_blank" href="">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-      </a>
-      <a title="Compartilhe no Twitter" target="_blank" href="">
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-      </a>
-      -->
     </div>
   </body>
 </html>
