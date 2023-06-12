@@ -23,8 +23,17 @@ function preload() {
   mFont = loadFont("MyFont-Bold.otf");
 }
 
-function saveLambe(event) {
-  event.preventDefault();
+window.addEventListener("load", (event) => {
+  sbs = document.getElementsByClassName("saveButton");
+  for (let item of sbs) {
+    item.addEventListener("click", (event) => {
+      event.preventDefault();
+      saveLambe();
+    });
+  }
+});
+
+function saveLambe() {
   var fname = document.getElementById("lambeTexto").value;
   fname = fname.trim().replace(/ +/g, '').substring(0,8);
   saveCanvas(fname, "jpg");
