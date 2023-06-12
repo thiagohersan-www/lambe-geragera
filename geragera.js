@@ -24,7 +24,7 @@ function preload() {
 }
 
 window.addEventListener("load", (event) => {
-  sbs = document.getElementsByClassName("saveButton");
+  const sbs = document.getElementsByClassName("saveButton");
   for (let item of sbs) {
     item.addEventListener("click", (event) => {
       event.preventDefault();
